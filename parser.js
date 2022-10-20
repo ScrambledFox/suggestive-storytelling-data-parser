@@ -127,7 +127,7 @@ fs.createReadStream(process.argv[2])
 
 const writeToCSV = async () => {
   stringify(exportData, (err, out) => {
-    fs.writeFile("data.csv", out, (err) => {});
+    fs.writeFile(process.argv[2].split(".")[0] + "_data.csv", out, (err) => {});
 
     console.log("Written CSV data to 'data.csv'");
   });
@@ -137,6 +137,9 @@ const writeToCSV = async () => {
     matic.push(`${line[0]} [${line[2]}] ${line[1]}`);
   });
 
-  await fs.writeFileSync("data-omatic.txt", matic.join("\n "));
+  await fs.writeFileSync(
+    process.argv[2].split(".")[0] + "_data-omatic.txt",
+    matic.join("\n ")
+  );
   console.log("Written OMATIC format data to 'data-omatic.txt'");
 };
